@@ -6,8 +6,9 @@
     "\\AlumniNetworkingPlatform\\AlumniNetworkingPlatform\\Migrations",
     "\\AlumniNetworkingPlatform\\AlumniNetworkingPlatform\\Models",
     "\\AlumniNetworkingPlatform\\AlumniNetworkingPlatform\\Views",
-    "\\AlumniNetworkingPlatform\\AlumniNetworkingPlatform\\Views\\Account"
+    "\\AlumniNetworkingPlatform\\AlumniNetworkingPlatform\\Views\\Account",
+    "\\AlumniNetworkingPlatform\\AlumniNetworkingPlatform\\Views\\Shared"
   ],
-  "SelectedNode": "\\AlumniNetworkingPlatform\\AlumniNetworkingPlatform\\Migrations\\202508050303094_InitialCreate.cs",
+  "SelectedNode": "\\AlumniNetworkingPlatform\\AlumniNetworkingPlatform\\Views\\Shared\\_Layout.cshtml",
   "PreviewInSolutionExplorer": false
 }
