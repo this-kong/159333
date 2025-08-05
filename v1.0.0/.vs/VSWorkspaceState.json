@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\AlumniNetworkingPlatform",
+    "\\AlumniNetworkingPlatform\\AlumniNetworkingPlatform",
+    "\\AlumniNetworkingPlatform\\AlumniNetworkingPlatform\\Migrations",
+    "\\AlumniNetworkingPlatform\\AlumniNetworkingPlatform\\Models",
+    "\\AlumniNetworkingPlatform\\AlumniNetworkingPlatform\\Views",
+    "\\AlumniNetworkingPlatform\\AlumniNetworkingPlatform\\Views\\Account"
+  ],
+  "SelectedNode": "\\AlumniNetworkingPlatform\\AlumniNetworkingPlatform\\Migrations\\202508050303094_InitialCreate.cs",
+  "PreviewInSolutionExplorer": false
+}

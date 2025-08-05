@@ -1,0 +1,375 @@
+﻿/* 基础变量定义 */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --student-color: #1abc9c;
+    --alumni-color: #3498db;
+    --admin-color: #9b59b6;
+    --light-gray: #f8f9fa;
+    --dark-gray: #343a40;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+/* 基础重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* 登录容器 */
+.login-container {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* 登录头部 */
+.login-header {
+    background: var(--primary-color);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+    .login-header h2 {
+        font-weight: 700;
+        margin-bottom: 5px;
+        font-size: 2.2rem;
+    }
+
+    .login-header p {
+        opacity: 0.8;
+        font-size: 1.1rem;
+    }
+
+/* 角色选择器 */
+.role-selector {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    background: rgba(44, 62, 80, 0.05);
+}
+
+.role-card {
+    width: 150px;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+    border: 2px solid transparent;
+}
+
+    .role-card:hover,
+    .role-card.active {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow);
+    }
+
+    .role-card.active {
+        border-color: currentColor;
+    }
+
+    .role-card.student {
+        color: var(--student-color);
+    }
+
+    .role-card.alumni {
+        color: var(--alumni-color);
+    }
+
+    .role-card.admin {
+        color: var(--admin-color);
+    }
+
+.role-icon {
+    font-size: 3rem;
+    padding: 15px 0;
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.role-label {
+    padding: 12px 0;
+    font-weight: 600;
+    background: white;
+}
+
+/* 表单容器 */
+.form-container {
+    padding: 30px;
+}
+
+.form-section {
+    display: none;
+}
+
+    .form-section.active {
+        display: block;
+        animation: fadeIn 0.5s ease;
+    }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 表单标题 */
+.form-title {
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 10px;
+    font-size: 1.8rem;
+}
+
+    .form-title:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: var(--secondary-color);
+        border-radius: 3px;
+    }
+
+/* 表单元素 */
+.form-label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+    color: var(--dark-gray);
+}
+
+.form-control {
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-size: 1rem;
+    transition: var(--transition);
+    width: 100%;
+}
+
+    .form-control:focus {
+        border-color: var(--secondary-color);
+        box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+        outline: none;
+    }
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group-text {
+    background-color: var(--light-gray);
+    border: 1px solid #ced4da;
+    padding: 0.75rem;
+    border-radius: 8px 0 0 8px;
+}
+
+.form-check {
+    margin-bottom: 15px;
+}
+
+.form-check-input {
+    width: 20px;
+    height: 20px;
+    margin-top: 0.25rem;
+    margin-right: 0.5rem;
+}
+
+/* 按钮 */
+.btn-login {
+    background: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    padding: 12px 20px;
+    width: 100%;
+    border-radius: 8px;
+    transition: var(--transition);
+    border: none;
+    margin-top: 15px;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+    .btn-login:hover {
+        background: var(--secondary-color);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+/* 表单页脚 */
+.form-footer {
+    text-align: center;
+    margin-top: 25px;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+    .form-footer p {
+        margin-bottom: 10px;
+    }
+
+.switch-form {
+    color: var(--secondary-color);
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+    .switch-form:hover {
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+
+.text-muted {
+    color: #6c757d;
+}
+
+.text-danger {
+    color: var(--danger-color);
+    font-size: 0.9rem;
+    margin-top: 5px;
+    display: block;
+}
+
+.is-invalid {
+    border-color: var(--danger-color);
+}
+
+/* 登录图片区域 */
+.login-image {
+    background: url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80') center/cover;
+    min-height: 500px;
+    display: flex;
+    align-items: flex-end;
+    padding: 30px;
+    color: white;
+    position: relative;
+}
+
+    .login-image:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+    }
+
+.image-content {
+    position: relative;
+    z-index: 2;
+}
+
+    .image-content h3 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+
+    .image-content p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+    }
+
+/* 统计区域 */
+.d-flex {
+    display: flex;
+    margin-top: 25px;
+}
+
+.me-3 {
+    margin-right: 1rem;
+}
+
+.d-flex h4 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+.d-flex p {
+    font-size: 0.95rem;
+    opacity: 0.8;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .role-selector {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .role-card {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .login-header {
+        padding: 20px;
+    }
+
+    .form-container {
+        padding: 20px;
+    }
+
+    .form-title {
+        font-size: 1.5rem;
+    }
+
+    .d-flex {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        padding: 10px;
+    }
+
+    .login-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .form-title {
+        font-size: 1.4rem;
+    }
+
+    .form-control {
+        padding: 10px 12px;
+    }
+}
