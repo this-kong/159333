@@ -1,0 +1,341 @@
+﻿/* 基础重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+/*Login*/
+
+.login-page-container {
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* 登录容器 */
+.login-container {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* 登录头部 */
+.login-header {
+    background: #2c3e50; /* 原primary-color */
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+    .login-header h2 {
+        font-weight: 700;
+        margin-bottom: 5px;
+        font-size: 2.2rem;
+    }
+
+    .login-header p {
+        opacity: 0.8;
+        font-size: 1.1rem;
+    }
+
+/* 角色选择器 */
+.role-selector {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    background: rgba(44, 62, 80, 0.05); /* 原primary-color的透明版 */
+}
+
+.role-card {
+    width: 150px;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease; /* 原transition */
+    text-align: center;
+    border: 2px solid transparent;
+}
+
+    .role-card:hover,
+    .role-card.active {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 原shadow */
+    }
+
+    .role-card.active {
+        border-color: currentColor;
+    }
+
+    .role-card.student {
+        color: #1abc9c; /* 原student-color */
+    }
+
+    .role-card.alumni {
+        color: #3498db; /* 原alumni-color */
+    }
+
+    .role-card.admin {
+        color: #9b59b6; /* 原admin-color */
+    }
+
+.role-icon {
+    font-size: 3rem;
+    padding: 15px 0;
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.role-label {
+    padding: 12px 0;
+    font-weight: 600;
+    background: white;
+}
+
+/* 表单容器 */
+.form-container {
+    padding: 30px;
+}
+
+.form-section {
+    display: none;
+}
+
+    .form-section.active {
+        display: block;
+        animation: fadeIn 0.5s ease;
+    }
+
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.input-group {
+    width: 90%;
+    max-width: 600px;
+    margin-bottom: 20px;
+}
+
+.form-check {
+    width: 90%;
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.btn-login {
+    width: 90%;
+    max-width: 600px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 表单标题 */
+.form-title {
+    color: #2c3e50; /* 原primary-color */
+    margin-bottom: 25px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 10px;
+    font-size: 1.8rem;
+}
+
+    .form-title:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: #3498db; /* 原secondary-color */
+        border-radius: 3px;
+    }
+
+/* 表单元素 */
+.form-label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+    color: #343a40; /* 原dark-gray */
+}
+
+.form-control {
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-size: 1rem;
+    transition: all 0.3s ease; /* 原transition */
+    width: 100%;
+}
+
+    .form-control:focus {
+        border-color: #3498db; /* 原secondary-color */
+        box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+        outline: none;
+    }
+
+.input-group-text {
+    background-color: #f8f9fa; /* 原light-gray */
+    border: 1px solid #ced4da;
+    padding: 0.75rem;
+    border-radius: 8px 0 0 8px;
+}
+
+.form-check-input {
+    width: 20px;
+    height: 20px;
+    margin-top: 0.25rem;
+    margin-right: 0.5rem;
+}
+
+/* 按钮 */
+.btn-login {
+    background: #2c3e50; /* 原primary-color */
+    color: white;
+    font-weight: 600;
+    padding: 12px 20px;
+    width: 100%;
+    border-radius: 8px;
+    transition: all 0.3s ease; /* 原transition */
+    border: none;
+    margin-top: 15px;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+    .btn-login:hover {
+        background: white;
+        color: #2c3e50;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+/* 表单页脚 */
+.form-footer {
+    text-align: center;
+    margin-top: 25px;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+    .form-footer p {
+        margin-bottom: 10px;
+    }
+
+.switch-form {
+    color: #3498db; /* 原secondary-color */
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: 500;
+    transition: all 0.3s ease; /* 原transition */
+}
+
+    .switch-form:hover {
+        color: #2c3e50; /* 原primary-color */
+        text-decoration: none;
+    }
+
+.text-muted {
+    color: #6c757d;
+}
+
+.text-danger {
+    color: #dc3545; /* 原danger-color */
+    font-size: 0.9rem;
+    margin-top: 5px;
+    display: block;
+}
+
+.is-invalid {
+    border-color: #dc3545; /* 原danger-color */
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .role-selector {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .role-card {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .login-header {
+        padding: 20px;
+    }
+
+    .form-container {
+        padding: 20px;
+    }
+
+    .form-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        padding: 10px;
+    }
+
+    .login-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .form-title {
+        font-size: 1.4rem;
+    }
+
+    .form-control {
+        padding: 10px 12px;
+    }
+}
+
+h2 {
+    color: white; /* 原primary-color */
+    margin-bottom: 25px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 10px;
+    font-size: 1.8rem;
+}
+
+h4 {
+    color: white; /* 原primary-color */
+    margin-bottom: 25px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 10px;
+    font-size: 1.5rem;
+}
