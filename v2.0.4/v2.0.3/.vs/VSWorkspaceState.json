@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\AlumniPlatform",
+    "\\AlumniPlatform\\AlumniPlatform",
+    "\\AlumniPlatform\\AlumniPlatform\\Controllers",
+    "\\AlumniPlatform\\AlumniPlatform\\Models",
+    "\\AlumniPlatform\\AlumniPlatform\\Views",
+    "\\AlumniPlatform\\AlumniPlatform\\Views\\Alumni",
+    "\\AlumniPlatform\\AlumniPlatform\\Views\\Shared"
+  ],
+  "SelectedNode": "\\AlumniPlatform\\AlumniPlatform\\Controllers\\AlumniController.cs",
+  "PreviewInSolutionExplorer": false
+}
