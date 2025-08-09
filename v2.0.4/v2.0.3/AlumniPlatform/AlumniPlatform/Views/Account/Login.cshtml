@@ -1,0 +1,265 @@
+﻿﻿@using AlumniPlatform.Models
+@model LoginViewModel
+@*@{ViewBag.Title = "登录";}*@
+
+<head>
+    <link href="~/Content/login-style.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/login-script.js"></script>
+</head>
+
+<main aria-labelledby="title">
+    <h2 id="title">@ViewBag.Title.</h2>
+
+    <div class="login-header">
+        <h2><i class="fas fa-graduation-cap me-2"></i>校友社交平台</h2>
+        <p>连接校友，共创未来</p>
+    </div>
+
+    <div class="role-selector">
+        <!-- 角色卡片添加点击事件 -->
+        <div class="role-card student active" data-role="student" onclick="switchRole('student')">
+            <div class="role-icon"><i class="fas fa-user-graduate"></i></div>
+            <div class="role-label">学生登录</div>
+        </div>
+        <div class="role-card alumni" data-role="alumni" onclick="switchRole('alumni')">
+            <div class="role-icon"><i class="fas fa-briefcase"></i></div>
+            <div class="role-label">校友登录</div>
+        </div>
+        <div class="role-card admin" data-role="admin" onclick="switchRole('admin')">
+            <div class="role-icon"><i class="fas fa-user-cog"></i></div>
+            <div class="role-label">管理员登录</div>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <!-- 学生登录表单 -->
+        <div class="form-section student active">
+            <h3 class="form-title">学生登录</h3>
+            <div class="form-wrapper">
+                @using (Html.BeginForm("Login", "Account", new { role = "student", ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "studentLoginForm", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger", style = "text-align: center; margin-bottom: 20px;" })
+                    <div class="mb-3">
+                        @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "name@school.edu" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="mb-3">
+                        @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "请输入密码" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="mb-3 form-check">
+                        @Html.CheckBoxFor(m => m.RememberMe, new { @class = "form-check-input" })
+                        @Html.LabelFor(m => m.RememberMe, new { @class = "form-check-label" })
+                    </div>
+                    <button type="submit" class="btn btn-login">登录</button>
+                }
+                <div class="form-footer">
+                    <p>还没有账户？ <span class="switch-form" data-role="student" data-form="register">注册学生账户</span></p>
+                    <p>@Html.ActionLink("忘记密码？", "ForgotPassword", null, new { @class = "text-muted" })</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 校友登录表单 -->
+        <div class="form-section alumni">
+            <h3 class="form-title">校友登录</h3>
+            <div class="form-wrapper">
+                @using (Html.BeginForm("Login", "Account", new { role = "alumni", ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "alumniLoginForm", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="mb-3">
+                        @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "name@company.com" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="mb-3">
+                        @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "请输入密码" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="mb-3 form-check">
+                        @Html.CheckBoxFor(m => m.RememberMe, new { @class = "form-check-input" })
+                        @Html.LabelFor(m => m.RememberMe, new { @class = "form-check-label" })
+                    </div>
+                    <button type="submit" class="btn btn-login">登录</button>
+                }
+                <div class="form-footer">
+                    <p>还没有账户？ <span class="switch-form" data-role="alumni" data-form="register">注册校友账户</span></p>
+                    <p>@Html.ActionLink("忘记密码？", "ForgotPassword", null, new { @class = "text-muted" })</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 管理员登录表单 -->
+        <div class="form-section admin">
+            <h3 class="form-title">管理员登录</h3>
+            <div class="form-wrapper">
+                @using (Html.BeginForm("Login", "Account", new { role = "admin", ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "adminLoginForm", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger", style = "text-align: center; margin-bottom: 20px;" })
+                    <div class="mb-3">
+                        <label class="form-label">管理员账号</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-user-shield"></i></span>
+                            @Html.TextBox("AdminUsername", "", new { @class = "form-control", placeholder = "输入管理员账号", required = "required" })
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "请输入密码" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <button type="submit" class="btn btn-login">登录</button>
+                }
+                <div class="form-footer">
+                    <p>请联系系统管理员获取账号</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 学生注册表单 -->
+    <div class="form-section student register">
+        <h3 class="form-title">学生注册</h3>
+        <div class="form-wrapper">
+            @using (Html.BeginForm("Register", "Account", new { role = "student", ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "studentRegisterForm", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="mb-3">
+                    <label class="form-label">学号</label>
+                    @Html.TextBox("StudentId", "", new { @class = "form-control", placeholder = "请输入学号", required = "required" })
+                </div>
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "name@school.edu", required = "required" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "至少8位字符", required = "required" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">确认密码</label>
+                        @Html.Password("ConfirmPassword", "", new { @class = "form-control", placeholder = "再次输入密码", required = "required" })
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-login">注册</button>
+            }
+            <div class="form-footer">
+                <p>已有账户？ <span class="switch-form" data-role="student" data-form="login">登录</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 校友注册表单 -->
+    <div class="form-section alumni register">
+        <h3 class="form-title">校友注册</h3>
+        <div class="form-wrapper">
+            @using (Html.BeginForm("Register", "Account", new { role = "alumni", ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "alumniRegisterForm", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="mb-3">
+                    <label class="form-label">学号</label>
+                    @Html.TextBox("AlumniId", "", new { @class = "form-control", placeholder = "请输入学号", required = "required" })
+                </div>
+                <div class="mb-3">
+                    @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "name@company.com", required = "required" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "至少8位字符", required = "required" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">确认密码</label>
+                        @Html.Password("ConfirmPassword", "", new { @class = "form-control", placeholder = "再次输入密码", required = "required" })
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-login">注册</button>
+            }
+            <div class="form-footer">
+                <p>已有账户？ <span class="switch-form" data-role="alumni" data-form="login">登录</span></p>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        // 角色切换功能
+        function switchRole(role) {
+            // 更新角色卡片状态
+            document.querySelectorAll('.role-card').forEach(card => {
+                card.classList.toggle('active', card.dataset.role === role);
+            });
+
+            // 隐藏所有表单
+            document.querySelectorAll('.form-section').forEach(form => {
+                form.style.display = 'none';
+            });
+
+            // 显示当前角色的登录表单
+            const loginForm = document.querySelector(`.form-section.${role}:not(.register)`);
+            if (loginForm) loginForm.style.display = 'block';
+        }
+
+        // 表单切换功能（登录/注册）
+        function switchForm(role, formType) {
+            // 隐藏当前角色所有表单
+            document.querySelectorAll(`.form-section.${role}`).forEach(form => {
+                form.style.display = 'none';
+            });
+
+            // 显示目标表单
+            const targetForm = formType === 'register'
+                ? document.querySelector(`.form-section.${role}.register`)
+                : document.querySelector(`.form-section.${role}:not(.register)`);
+
+            if (targetForm) targetForm.style.display = 'block';
+        }
+
+        // 为所有切换链接添加事件
+        document.querySelectorAll('.switch-form').forEach(link => {
+            link.onclick = function (e) {
+                e.preventDefault();
+                const role = this.dataset.role;
+                const formType = this.dataset.form;
+                switchForm(role, formType);
+            };
+        });
+
+        // 页面加载时绑定角色卡片事件
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.role-card').forEach(card => {
+                card.addEventListener('click', function () {
+                    switchRole(this.dataset.role);
+                });
+            });
+        });
+    </script>
+}
