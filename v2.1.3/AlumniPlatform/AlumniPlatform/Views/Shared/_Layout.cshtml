@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        .custom-navbar {
+            background: #2c3e50; /* 登录页面标题栏的颜色 */
+            padding: 10px 0;
+        }
+
+            .custom-navbar .navbar-brand,
+            .custom-navbar .nav-link {
+                color: white;
+            }
+
+            .custom-navbar .navbar-toggler {
+                border-color: rgba(255, 255, 255, 0.5);
+            }
+
+            .custom-navbar .navbar-toggler-icon {
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+            }
+    </style>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark custom-navbar">
+        <div class="container">
+            @Html.ActionLink("校友交流平台", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="切换导航" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+
+                    @*游客登录状态：活动
+                学生：个人空间、活动、寻找校友（校友index）、私聊
+                校友：个人空间、活动、私聊
+                管理员：活动、寻找校友（校友index）、学生列表、管理员列表*@
+
+                    @*个人空间就是学生/校友的详细资料（details/students或者details/alumni），扩展出所有人增减自己的资料*@
+                    <li>@Html.ActionLink("个人空间", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+
+                    @*活动页面就是index/events，所有人可以查看details，校友还可以create/edit自己发布的活动，管理员还可以delete活动*@
+                    @*需要确定校友只能修改自己的活动但是管理员可以修改所有人的活动*@
+                    @*学生可以报名活动，发布活动的人以及管理员能看到谁报名了以及他的details，向学生邮箱推送活动*@
+                    @*出席？怎么追踪*@
+                <li>@Html.ActionLink("活动", "Index", "Events", new { area = "" }, new { @class = "nav-link" })</li>
+
+                    @*校友index（index/alumni），学生只能查看index和details，管理员可以看到所有details并且可以修改、匹配机制、搜索筛选*@
+                    <li>@Html.ActionLink("寻找校友", "Index", "Alumni", new { area = "" }, new { @class = "nav-link" })</li>
+
+                    @*这个要写一下，私聊和群聊*@
+                    <li>@Html.ActionLink("聊天室", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+
+                    @*仅管理员可见，美化一下就行*@
+                    <li>@Html.ActionLink("学生列表", "Index", "Students", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("管理员列表", "Index", "Admins", new { area = "" }, new { @class = "nav-link" })</li>
+            </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - 校友交流平台</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

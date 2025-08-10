@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>聊天页面</title>
+    <link rel="stylesheet" href="~/Content/Contact-style.css" />
+</head>
+
+<body>
+
+    <!-- 手机上切换联系人列表的按钮 -->
+    <!--<button id="toggle-contacts" class="toggle-contacts-btn">☰ 联系人</button>-->
+
+    <div class="chat-container">
+        <!-- 左侧联系人 -->
+        <div class="contact-list">
+            <div class="contact-header">
+                <h2>联系人</h2>
+                <button id="add-contact-btn">+</button>
+            </div>
+            <div class="contact-search-bar">
+                <input type="text" id="contact-search-input" placeholder="搜索联系人..." />
+            </div>
+            <ul id="contacts">
+                <li data-name="Alice" class="active">Alice</li>
+                <li data-name="Bob">Bob</li>
+                <li data-name="Charlie">Charlie</li>
+            </ul>
+        </div>
+
+        <!-- 右侧聊天区 -->
+        <div class="chat-area">
+            <div class="chat-header">
+                <button id="toggle-contacts" class="toggle-contacts-btn">☰ 联系人</button>
+                <h3 id="chat-with">Alice</h3>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <div class="message received">你好！</div>
+                <div class="message sent">你好呀！</div>
+            </div>
+            <div class="chat-input">
+                <textarea id="message-input" placeholder="输入消息..."></textarea>
+                <button id="send-btn">发送</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加/创建群聊弹窗 -->
+    <div id="add-contact-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>添加或创建群聊</h3>
+            <button id="add-single-contact">添加群聊</button>
+            <button id="create-group">创建群聊</button>
+        </div>
+    </div>
+
+
+    <script src="~/Scripts/Contact-script.js"></script>
+</body>
+</html>

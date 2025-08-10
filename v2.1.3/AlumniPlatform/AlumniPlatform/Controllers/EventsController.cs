@@ -1,0 +1,180 @@
+﻿using AlumniPlatform.Models;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+
+namespace AlumniPlatform.Controllers
+{
+    public class EventsController : Controller
+    {
+        private AlumniNetworkingPlatformContext db = new AlumniNetworkingPlatformContext();
+
+        // GET: Events
+        public ActionResult Index()
+        {
+            return View(db.Events.ToList());
+        }
+
+        // GET: Events/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Event @event = db.Events.Find(id);
+            if (@event == null)
+            {
+                return HttpNotFound();
+            }
+            return View(@event);
+        }
+
+        // GET: Events/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Events/Create
+        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性；有关
+        // 更多详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,Title,EventDate,Location,Description")] Event @event)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Events.Add(@event);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(@event);
+        }
+
+        // GET: Events/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Event @event = db.Events.Find(id);
+            if (@event == null)
+            {
+                return HttpNotFound();
+            }
+            return View(@event);
+        }
+
+        // POST: Events/Edit/5
+        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性；有关
+        // 更多详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        // POST: Events/Edit/5
+        public ActionResult Edit([Bind(Include = "Id,Title,EventDate,Location,Description,Category,ImagePath")] Event @event, HttpPostedFileBase imageFile)
+        {
+            if (imageFile != null && imageFile.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(imageFile.FileName);
+                var path = Path.Combine(Server.MapPath("~/Images/Events"), fileName);
+                imageFile.SaveAs(path);
+                @event.ImagePath = "/Images/Events/" + fileName;
+            }
+
+            if (ModelState.IsValid)
+            {
+                db.Entry(@event).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(@event);
+        }
+
+
+        // GET: Events/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Event @event = db.Events.Find(id);
+            if (@event == null)
+            {
+                return HttpNotFound();
+            }
+            return View(@event);
+        }
+
+        // POST: Events/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Event @event = db.Events.Find(id);
+            db.Events.Remove(@event);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+        // POST: Events/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,Title,EventDate,Location,Description,Category,ImagePath")] Event @event, HttpPostedFileBase imageFile)
+        {
+            if (imageFile != null && imageFile.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(imageFile.FileName);
+                var path = Path.Combine(Server.MapPath("~/Images/Events"), fileName);
+                imageFile.SaveAs(path);
+                @event.ImagePath = "/Images/Events/" + fileName; // 保存相对路径
+            }
+
+            if (ModelState.IsValid)
+            {
+                db.Events.Add(@event);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(@event);
+        }
+
+        // GET: Events/Register/5
+        public ActionResult Register(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // 验证事件是否存在，不需要其他逻辑
+            Event @event = db.Events.Find(id);
+            if (@event == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(@event); 
+        }
+
+    }
+
+}

@@ -1,0 +1,132 @@
+﻿@model AlumniPlatform.Models.Event
+@{
+    ViewBag.Title = "活动详情";
+}
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Model.Title - 校友社交平台</title>
+    <link href="~/Content/events-style.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/event-details.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- 顶部横幅区域 -->
+    <div class="banner">
+        <div class="container">
+            <div class="banner-content text-center">
+                <h1 class="platform-name"><i class="fas fa-graduation-cap me-2"></i>校友社交平台</h1>
+                <p class="platform-tagline">连接校友，共创未来</p>
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <h2 class="mb-4">活动详情</h2>
+                        <p class="lead mb-4">查看活动信息，加入校友们的交流</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-detail-container">
+        <div class="event-header">
+            <div class="event-category">
+                <i class="fas fa-users"></i> @Model.Category
+            </div>
+            <h1 class="event-title">@Model.Title</h1>
+        </div>
+
+        <div class="event-detail-card">
+            <div class="event-info-grid">
+                <div class="event-info-item">
+                    <i class="fas fa-calendar-day"></i>
+                    <div class="event-info-text">
+                        <h4>活动日期</h4>
+                        <p>@Model.EventDate.ToString("yyyy年MM月dd日 | HH:mm")</p>
+                    </div>
+                </div>
+
+                <div class="event-info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="event-info-text">
+                        <h4>活动地点</h4>
+                        <p>@Model.Location</p>
+                    </div>
+                </div>
+
+                <div class="event-info-item">
+                    <i class="fas fa-user-friends"></i>
+                    <div class="event-info-text">
+                        <h4>参与人数</h4>
+                        <p>@(Model.Attendances?.Count ?? 0) 人</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event-description">
+                <h3><i class="fas fa-align-left"></i> 活动详情</h3>
+                <p>@Model.Description</p>
+            </div>
+        </div>
+
+        <div class="event-actions">
+            <!-- 立即报名按钮 -->
+            <a href="@Url.Action("Register", "Events", new { id = Model.Id })" class="btn btn-primary">立即报名
+    @*<i class="fas fa-check-circle me-2"></i> 立即报名*@
+</a>
+            <a href="@Url.Action("Index")" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-2"></i> 返回活动列表
+            </a>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="footer-title">关于校友社交平台</h5>
+                    <p>连接校友，共创未来。为校友和学生提供专业的交流平台，促进职业发展和知识共享。</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="footer-title">快速链接</h5>
+                    <div class="footer-links">
+                        <a href="#">首页</a>
+                        <a href="#">活动</a>
+                        <a href="#">校友名录</a>
+                        <a href="#">职位发布</a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="footer-title">资源</h5>
+                    <div class="footer-links">
+                        <a href="#">常见问题</a>
+                        <a href="#">帮助中心</a>
+                        <a href="#">活动指南</a>
+                        <a href="#">联系我们</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h5 class="footer-title">联系我们</h5>
+                    <div class="footer-links">
+                        <p><i class="fas fa-map-marker-alt me-2"></i> 大学路123号</p>
+                        <p><i class="fas fa-phone me-2"></i> 456-7890</p>
+                        <p><i class="fas fa-envelope me-2"></i> alumni@u</p>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 校友社交平台. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

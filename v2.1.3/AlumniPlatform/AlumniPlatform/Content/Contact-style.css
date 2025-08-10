@@ -1,0 +1,347 @@
+﻿body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.chat-container {
+    display: flex;
+    height: calc(100vh - 70px); /* 70px 是导航栏高度，根据你的样式调整 */
+}
+
+/* 左侧联系人列表 */
+.contact-list {
+    width: 250px;
+    background-color: #2c3e50;
+    color: white;
+    padding: 0 10px;
+    overflow-y: auto;
+}
+
+/* 联系人标题 + 加号按钮 */
+.contact-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+    .contact-header h2 {
+        color: white;
+        margin: 0;
+        font-size: 16px;
+    }
+
+/* 搜索框所在一行 */
+.contact-search-bar {
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+#contact-search-input {
+    flex: 1;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* 加号按钮 */
+#add-contact-btn {
+    width: 25px;
+    height: 25px;
+    margin-left: 5px;
+    font-size: 20px;
+    line-height: 25px;
+    border: none;
+    background-color: #3498db;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+    #add-contact-btn:hover {
+        background-color: #0056b3;
+    }
+
+/* 联系人列表项 */
+.contact-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-list li {
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+    .contact-list li:hover,
+    .contact-list li.active {
+        background-color: #34495e;
+    }
+
+/* 右侧聊天区 */
+.chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+.chat-header {
+    position: relative;
+    height: 50px;
+    background-color: #3498db;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    justify-content: flex-start; /* 按钮靠左 */
+}
+
+/* 联系人名字居中 */
+#chat-with {
+    flex: 1; /* 占满剩余宽度 */
+    text-align: center; /* 居中显示 */
+    margin: 0;
+    user-select: none;
+}
+
+/* 聊天消息容器 */
+.chat-messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 消息气泡 */
+.message {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 5px 0;
+    border-radius: 8px;
+    max-width: 75%;
+    word-wrap: break-word;
+}
+
+.sent {
+    background-color: #3498db;
+    color: white;
+    align-self: flex-end;
+}
+
+.received {
+    background-color: #ecf0f1;
+    color: black;
+    align-self: flex-start;
+}
+
+/* 输入区 */
+.chat-input {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #ccc;
+    padding: 10px 20px;
+    background-color: white;
+}
+
+#message-input {
+    flex: 1;
+    resize: none;
+    min-height: 36px;
+    max-height: 120px;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    overflow-y: auto;
+    max-width: 80%;
+}
+
+#send-btn {
+    margin-left: 10px;
+    padding: 8px 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+    #send-btn:hover {
+        background-color: #2980b9;
+    }
+
+/* 菜单按钮（手机端显示，桌面端隐藏） */
+.menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* 切换联系人按钮，默认隐藏，手机屏幕显示 */
+.toggle-contacts-btn {
+    position: static; /* 或直接删除 position 属性 */
+    display: inline-block;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 10px;
+    z-index: 2;
+}
+
+
+/* 按钮靠左 */
+#toggle-contacts {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 2; /* 确保按钮在最上层 */
+}
+
+/* 窄屏适配（max-width:768px） */
+@media (max-width: 768px) {
+    .chat-container {
+        flex-direction: column;
+        position: relative;
+    }
+
+    /* 联系人面板作为覆盖层 */
+    .contact-list {
+        position: fixed;
+        top: 50px;
+        left: 0;
+        width: 250px;
+        height: calc(100vh - 50px);
+        background-color: #2c3e50;
+        color: white;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1050;
+        overflow-y: auto;
+        padding: 10px;
+    }
+
+        /* 显示联系人栏 */
+        .contact-list.show {
+            transform: translateX(0);
+        }
+
+    /* 显示切换联系人按钮 */
+    .toggle-contacts-btn {
+        display: block;
+    }
+
+    /* 聊天区宽度撑满 */
+    .chat-area {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+}
+
+/* 弹窗基础样式 */
+/* === 弹窗（模态框）基础样式（替换原有 modal 样式） === */
+/* 默认隐藏，用 .open 类显示（避免页面刷新就弹出） */
+.modal {
+    display: none; /* 默认隐藏 */
+    position: fixed;
+    inset: 0; /* top:0; right:0; bottom:0; left:0; */
+    background: rgba(0,0,0,0.45);
+    align-items: center;
+    justify-content: center;
+    z-index: 2000; /* 高于 .contact-list (1050) */
+    padding: 20px; /* 给窄屏一点内边距 */
+    box-sizing: border-box;
+}
+
+    /* 加上 .open 时显示 */
+    .modal.open {
+        display: flex;
+    }
+
+/* 弹窗内容（视觉风格保留你喜欢的深色主题） */
+.modal-content {
+    background: #1f1f1f;
+    color: #fff;
+    padding: 20px 24px;
+    border-radius: 12px;
+    width: 360px;
+    max-width: 100%;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    animation: popupFade 220ms ease-out;
+    position: relative;
+}
+
+/* 窄屏时 modal 内容更灵活，保持在侧边栏之上并居中 */
+@media (max-width: 768px) {
+    .modal-content {
+        width: min(92%, 420px); /* 最多 420px，窄屏用 92% */
+        margin: 0 auto;
+    }
+}
+
+/* 标题与按钮样式（保持风格） */
+.modal-content h3 {
+    margin: 0 0 16px 0;
+    font-size: 18px;
+    text-align: center;
+}
+
+.modal-content button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    background: #3a8fff;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.18s ease;
+}
+
+    .modal-content button:hover {
+        background: #5aa0ff;
+    }
+
+/* 关闭按钮（右上角） */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 22px;
+    color: #bbb;
+    cursor: pointer;
+}
+
+    .close-btn:hover {
+        color: #fff;
+    }
+
+/* 动画 */
+@keyframes popupFade {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
